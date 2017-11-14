@@ -3,7 +3,6 @@ import React from 'react';
 class TodoForm extends React.Component {
   constructor(props) {
     super(props);
-    this.receiveTodo = props.receiveTodo;
     this.state = {title: '', body: ''};
   }
 
@@ -20,7 +19,7 @@ class TodoForm extends React.Component {
   handleSubmit(event)  {
     event.preventDefault();
     this.setState({id: this.uniqueId()});
-    this.receiveTodo(this.state);
+    this.props.receiveTodo(this.state);
   }
 
   render() {

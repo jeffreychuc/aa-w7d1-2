@@ -38749,7 +38749,6 @@ var TodoForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (TodoForm.__proto__ || Object.getPrototypeOf(TodoForm)).call(this, props));
 
-    _this.receiveTodo = props.receiveTodo;
     _this.state = { title: '', body: '' };
     return _this;
   }
@@ -38773,7 +38772,7 @@ var TodoForm = function (_React$Component) {
     value: function handleSubmit(event) {
       event.preventDefault();
       this.setState({ id: this.uniqueId() });
-      this.receiveTodo(this.state);
+      this.props.receiveTodo(this.state);
     }
   }, {
     key: 'render',
