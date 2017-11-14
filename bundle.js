@@ -19434,6 +19434,10 @@ var todosReducer = function todosReducer() {
       newState = (0, _lodash.merge)({}, state);
       newState[action.todo.id] = action.todo;
       return newState;
+    case _todo_actions.REMOVE_TODO:
+      newState = (0, _lodash.merge)({}, state);
+      delete newState[action.todo.id];
+      return newState;
     default:
       return state;
   }
@@ -19453,6 +19457,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var RECEIVE_TODOS = exports.RECEIVE_TODOS = 'RECEIVE_TODOS';
 var RECEIVE_TODO = exports.RECEIVE_TODO = 'RECEIVE_TODO';
+var REMOVE_TODO = exports.REMOVE_TODO = 'REMOVE_TODO';
 
 var receiveTodos = exports.receiveTodos = function receiveTodos(todos) {
   return {
@@ -19464,6 +19469,13 @@ var receiveTodos = exports.receiveTodos = function receiveTodos(todos) {
 var receiveTodo = exports.receiveTodo = function receiveTodo(todo) {
   return {
     type: RECEIVE_TODO,
+    todo: todo
+  };
+};
+
+var removeTodo = exports.removeTodo = function removeTodo(todo) {
+  return {
+    type: REMOVE_TODO,
     todo: todo
   };
 };
@@ -38737,7 +38749,6 @@ var TodoForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (TodoForm.__proto__ || Object.getPrototypeOf(TodoForm)).call(this, props));
 
-    console.log(props.receiveTodo);
     _this.receiveTodo = props.receiveTodo;
     _this.state = { title: '', body: '' };
     return _this;
@@ -38761,7 +38772,6 @@ var TodoForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
-      console.log(this.receiveTodo);
       this.setState({ id: this.uniqueId() });
       this.receiveTodo(this.state);
     }
